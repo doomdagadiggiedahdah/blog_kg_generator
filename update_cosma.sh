@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /home/mat/Documents/ProgramExperiments/kg2online/
 source .creds
 
 # TODO: check if this overwrites
@@ -25,9 +26,15 @@ sed -i 's|history: true|history: false|' ./config.yml
 sed -i 's|generate_id: always|generate_id: never|' ./config.yml # not sure if this is needed or not.
 
 
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!$1"
+
+# call python for summary / node generation
+source venv/bin/activate
+python3 main.py $1
+deactivate
 
 cosma modelize
-firefox export/cosmoscope.html
+# firefox export/cosmoscope.html
 
 cd ./export/
 ftp -n -p $FTP_SERVER <<END_SCRIPT
