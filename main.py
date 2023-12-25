@@ -68,7 +68,7 @@ def summarize(post):
             Write this as if you were the author of the post and quite excited about the post's contents taking the tone of a random presenter, a cowboy, Shakespeare, a robot, anything! Anything you want to do to make it fun and interesting.
             Emojis are HIGHLY encouraged! And please make sure to put links to other websites in the summary if they are referenced in the post. 
             Make sure to say "I" and "me" as opposed to "the author" or "the writer", have this be your voice.
-            If a post references a another post of the following: {blog_list} then please link to it in the summary in the format [[name-of-linked-post.md]] (note the replacing of '_' with '-')
+            If a post references a another post of the following: {blog_list} then please link to it in the summary in the format [[name-of-linked-post.md]] (note the replacing of '_' with '-' as well as the ".md" instead of the ".html", please do not put ".html"; thank you.)
             """
             },
             {
@@ -78,7 +78,7 @@ def summarize(post):
         ])
 
     # isolate the basename of the post
-    base_name = post.split("/")[-1].split(".")[0].replace("_", "-")
+    base_name = post.split("/")[-1].split(".")[0]#.replace("_", "-")
 
     create_yaml(base_name, response.choices[0].message.content)
 

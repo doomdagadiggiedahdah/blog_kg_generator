@@ -1,7 +1,8 @@
 #!/bin/bash
 
 cd /home/mat/Documents/ProgramExperiments/kg2online/
-source .creds
+source ~/Documents/ProgramExperiments/.ftp_creds
+ 
 
 # TODO: check if this overwrites
 # doesn't seem like this overwrites, just returns an error (file exists)
