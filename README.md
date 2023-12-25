@@ -1,5 +1,5 @@
 # Walkthrough
-- [![Walkthrough](https://img.youtube.com/vi/Zm0imQ_qaCs/0.jpg)](https://www.youtube.com/watch?v=Zm0imQ_qaCs)
+- [![Walkthrough](https://img.youtube.com/vi/mUheCI9dYJc/0.jpg)](https://www.youtube.com/watch?v=mUheCI9dYJc)
 
 ## Installation
 - `git clone` the repo
