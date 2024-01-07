@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# replace with your own ftp server credentials
+source ~/Documents/ProgramExperiments/.ftp_creds
+
+# replace with the path to your notes and where you keep your blog posts locally
+notes="/home/mat/Obsidian/"
+blog_spot="/home/mat/Documents/blog/"
+
+# this is a flag to create a new folder online.
+HOLLA=""
+
+# pick file and folder location
+cd $notes && file=$(fzf --prompt="select blog post: ")
+cd $blog_spot && location="$(ls | fzf --prompt="where store this? ")"
+	
+	# if I want to make a new file, then enter gibberish.
+	# This makes new file, updates the path to upload online, and updates the flag to mkdir online
+#if [[ $location = "" ]]; then
+#	read -p "what would you like to name this folder to make?" new_location
+#	mkdir $blog_spot/$new_location
+#	blog_spot=$blog_spot$new_location
+#	HOLLA="HOLLA"
+#fi
+
+
+# convert / html name
+read -p "What would you like the website link to be? like blog/foo.html ::: " name
+new_file=$name.html
+echo $file
+echo $new_file
+echo $location
+echo $blog_spot$location
+pandoc $notes"$file" -c https://unpkg.com/mvp.css -s -o $blog_spot/$location/"$new_file"
+
+# ok, on the upload is where I'd like to change this shit.
+# Actually, I can keep a full copy of my website structure locally this way.
+# Full is when I want to create a new directory there needs to make one locally, and with ftp.
+# I can create everything in a sec, and then test it with that.
+# first. It's hard for me to think about "what's easiest to accomplish" rn.
+# I want to be able to choose what folder my post is going to go into.
+# Pump the results into fzf, then I get auto complete basically.
+# but I want an option to say "if not exist, create"
+# I do that locally, becaue that's easy, and then find out how to upload the file and create parent.
+
+# ok. I've got it looking at the right things...now when I'm on fzf, I want to have the ability to 
+# create a new folder. If entry is "" then ask user for input on what folder to make.
+
+
+# neat (and sad) because of the [[ -d jlkjlkjlkj ]] thing I don't need the HOLLA flag. :,(
+
+
+# upload
+cd $blog_spot$location
+ftp -n -p $FTP_SERVER <<END_SCRIPT
+user $FTP_USERNAME $FTP_PASSWORD
+cd blog
+put "$new_file"
+ls
+bye
+END_SCRIPT
+
+# show me the money Lebowski
+echo "Did this work?????"
+echo "Let's wait a couple seconds......"
+sleep 5 
+firefox enjoy.monster/blog/$new_file
+
+
+# this is where the cosma update should come in, accepting $new_file
+# one command that sends the post, and then calls everything else.
+/home/mat/Documents/ProgramExperiments/kg2online/update_cosma.sh $blog_spot$location/$new_file
