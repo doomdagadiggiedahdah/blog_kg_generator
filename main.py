@@ -68,7 +68,12 @@ def summarize(post):
             Write this as if you were the author of the post and quite excited about the post's contents taking the tone of a random presenter, a cowboy, Shakespeare, a robot, anything! Anything you want to do to make it fun and interesting.
             Emojis are HIGHLY encouraged! And please make sure to put links to other websites in the summary if they are referenced in the post. 
             Make sure to say "I" and "me" as opposed to "the author" or "the writer", have this be your voice.
-            If a post references a another post of the following: {blog_list} then please link to it in the summary in the format [[name-of-linked-post.md]] (note the replacing of '_' with '-' as well as the ".md" instead of the ".html", please do not put ".html"; thank you.)
+            
+            Rules for the links.
+	            - if the link is from the Blog List, format that in markdown internal link style (ie [[name-of-post.md]])
+		            - if there are underscores "_" in the title of the Blog List, replace them with a dash "-"
+                - otherwise, format it in the external link style (ie [here's some text](www.google.com))
+                - DO NOT use any other websites other than the above two.
             """
             },
             {
